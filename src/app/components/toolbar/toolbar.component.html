@@ -1,0 +1,43 @@
+<div class="row toolbar" role="banner">
+  <div>
+    <div class="col mr-new" >
+      <mat-icon aria-hidden="false" aria-label="add icon" >add</mat-icon><span>Nuevatarea</span>
+    </div>
+
+      <div class="col col-form" >
+        <div class="field">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label class="colorwhite">Titulo</mat-label>
+            <input
+              matInput
+              id="title"
+              name="titleName"
+              placeholder="Ingresa título..."
+              [(ngModel)]="taskobj.title"
+            />
+          </mat-form-field>
+        </div>
+        <div class="field checkboxTask">
+          <label class="form-check-label" for="flexCheckDefault">
+            Tarea completada
+          </label>
+          <input
+            class="form-check-input ml-1 checkComplete"
+            type="checkbox"
+            [(ngModel)]="taskobj.state"
+            id="flexCheckDefault"
+          />
+        </div>
+        <div class="field">
+          <button
+            type="button"
+            class="btn btn-light btn-guardar"
+            (click)="createTask()"
+          >
+            <mat-icon aria-hidden="false" aria-label="add icon" >add</mat-icon>
+            Guardar tarea
+          </button>
+        </div>
+      </div>
+  </div>
+</div>

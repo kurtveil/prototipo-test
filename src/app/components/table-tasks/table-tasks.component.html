@@ -1,0 +1,83 @@
+<div class="container">
+  <h2 class="colorTitle">
+    <mat-icon aria-hidden="false" aria-label="add icon" class="colorTitle"
+      >list</mat-icon
+    >Lista de tareas
+  </h2>
+  <div class="field">
+    <input
+      type="text"
+      name=""
+      placeholder="Buscar..."
+      class="form-control border"
+      id=""
+      (keyup)="applyFilter($event)" #input
+    />
+  </div>
+  <br />
+  <div class="example-container mat-elevation-z8">
+    <div class="example-table-container">
+      
+        <table class="tabla" mat-table [dataSource]="taskArray" matSortDirection="desc" matSort (matSortChange)="sortData($event)">
+
+            <!-- Index -->
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef scope="col">#</th>
+                <td mat-cell *matCellDef="let i = index;">{{ i + 1}}</td>
+            </ng-container>
+
+            <!-- Id -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef scope="col" mat-sort-header="id"> Id</th>
+                <td mat-cell *matCellDef="let element">{{ element.id}}</td>
+            </ng-container>
+
+            <!-- Title -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef scope="col" mat-sort-header="title"> Mis tareas</th>
+                <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+            </ng-container>
+
+            <!-- Complete task -->
+            <ng-container matColumnDef="complete">
+                <th mat-header-cell *matHeaderCellDef scope="col"> Completada</th>
+
+                <td mat-cell *matCellDef="let element" >
+                  <input
+                  class="form-check-input ml-1 checkbox-center"
+                  type="checkbox"
+                  value=""
+                  [(ngModel)]="element.state"
+                  id="flexCheckDefault"
+                />
+                  
+                </td>
+            </ng-container>
+
+            <!--Delete-->
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef scope="col"> Borrar</th>
+
+              <td mat-cell *matCellDef="let element">
+                  <span class="material-icons botonEliminar" matTooltip="Eliminar" [style.margin-right.px]="6"
+                      (click)="deleteTask(element.id)"> delete </span>
+              </td>
+          </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">
+                    No se encontraron resultados para la busqueda "{{ input.value }}"
+                </td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+  </div>
+
+ 
+</div>
