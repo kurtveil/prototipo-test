@@ -12,7 +12,6 @@ export class AppComponent {
 
   addItem(newItem: Task) {
     this.taskShared = newItem;
-    console.log(this.taskShared);
   }
 
 }

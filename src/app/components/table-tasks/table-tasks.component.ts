@@ -37,14 +37,10 @@ export class TableTasksComponent implements OnInit, OnChanges {
     this.getTasksArray();
      }
      ngOnChanges(changes: SimpleChanges){
-        console.log(changes.item.currentValue);
         if(changes.item.currentValue.title !== ''){
           this.item = changes.item.currentValue;
-          console.log('nueva tarea', + this.item);
           this.taskArray.data.push(this.item);
-          console.log(this.taskArray.data);
         }
-        console.log('tarea incompleta', + this.item);
      }
 
 
@@ -91,7 +87,6 @@ export class TableTasksComponent implements OnInit, OnChanges {
 
     this.taskArray.data = data.sort((a, b) => {
       let isAsc = sort.direction == 'asc';
-      console.log(sort.active);
       switch (sort.active) {
         case 'id': return compare(a.id, b.id, isAsc);
         case 'title': return compare(a.title, b.title, isAsc);
