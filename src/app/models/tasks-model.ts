@@ -1,8 +1,8 @@
 export class Task{
     constructor(
-        public  id = '',
-        public createdAt = new Date(),
+        public createdAt = new Date().setUTCSeconds(1234567890),
         public state = false,
-        public title = '' 
+        public title = '', 
+        public  id = '',
     ){}
 }

@@ -1,11 +1,9 @@
-import { Component, ViewChild, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Task } from 'src/app/models/tasks-model';
 import { HttpClient } from '@angular/common/http';
 import { TasksService } from 'src/app/services/tasks.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort, SortDirection } from '@angular/material/sort';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 const ELEMENTS: Task[] = [];
@@ -14,10 +12,9 @@ const ELEMENTS: Task[] = [];
   templateUrl: './table-tasks.component.html',
   styleUrls: ['./table-tasks.component.scss'],
 })
-export class TableTasksComponent implements OnInit {
+export class TableTasksComponent implements OnInit, OnChanges {
   displayedColumns: string[] = [
     'index',
-    'id',
     'title',
     'complete',
     'delete'
@@ -31,7 +28,7 @@ export class TableTasksComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator 
   @ViewChild(MatSort) sort!: MatSort;
-  @Input() valores: any;
+  @Input() item = new Task();
 
   constructor(public tasksServices: TasksService,
               private _httpClient: HttpClient) {}
@@ -39,6 +36,17 @@ export class TableTasksComponent implements OnInit {
   ngOnInit(): void {
     this.getTasksArray();
      }
+     ngOnChanges(changes: SimpleChanges){
+        console.log(changes.item.currentValue);
+        if(changes.item.currentValue.title !== ''){
+          this.item = changes.item.currentValue;
+          console.log('nueva tarea', + this.item);
+          this.taskArray.data.push(this.item);
+          console.log(this.taskArray.data);
+        }
+        console.log('tarea incompleta', + this.item);
+     }
+
 
   getTasksArray() {
     this.tasksServices.getTasks().subscribe((tasks: any) => {

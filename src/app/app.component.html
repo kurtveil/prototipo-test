@@ -1,12 +1,11 @@
-<app-header></app-header>
 
 <!-- Toolbar -->
-<app-toolbar></app-toolbar>
+<app-toolbar (newItemEvent)="addItem($event)"></app-toolbar>
 
   <div class="content" role="main">
    
     <div class="card-container">
-      <app-table-tasks></app-table-tasks>
+      <app-table-tasks [item]="taskShared"></app-table-tasks>
 
     </div>
 

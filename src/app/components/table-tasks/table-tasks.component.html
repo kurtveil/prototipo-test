@@ -20,25 +20,20 @@
       
         <table class="tabla" mat-table [dataSource]="taskArray" matSortDirection="desc" matSort (matSortChange)="sortData($event)">
 
-            <!-- Index -->
+            <!-- Id -->
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef scope="col">#</th>
                 <td mat-cell *matCellDef="let i = index;">{{ i + 1}}</td>
             </ng-container>
-
-            <!-- Id -->
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef scope="col" mat-sort-header="id"> Id</th>
-                <td mat-cell *matCellDef="let element">{{ element.id}}</td>
-            </ng-container>
+          
 
             <!-- Title -->
             <ng-container matColumnDef="title">
                 <th mat-header-cell *matHeaderCellDef scope="col" mat-sort-header="title"> Mis tareas</th>
-                <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'line': element.state, 'none': !element.state}" >{{ element.title }}</td>
             </ng-container>
 
-            <!-- Complete task -->
+            <!-- Complete -->
             <ng-container matColumnDef="complete">
                 <th mat-header-cell *matHeaderCellDef scope="col"> Completada</th>
 
@@ -48,6 +43,7 @@
                   type="checkbox"
                   value=""
                   [(ngModel)]="element.state"
+                  
                   id="flexCheckDefault"
                 />
                   
@@ -75,9 +71,9 @@
         </table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+      
     </div>
-
-  </div>
 
  
 </div>

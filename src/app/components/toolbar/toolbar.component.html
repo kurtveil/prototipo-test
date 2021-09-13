@@ -1,7 +1,10 @@
+<div style="justify-content: center; display: flex">
+  <img src="../assets/img/covinoc.png" alt="" />
+</div>
 <div class="row toolbar" role="banner">
   <div>
     <div class="col mr-new" >
-      <mat-icon aria-hidden="false" aria-label="add icon" >add</mat-icon><span>Nuevatarea</span>
+      <mat-icon aria-hidden="false" aria-label="add icon" >add</mat-icon><span class="title">Nueva tarea</span>
     </div>
 
       <div class="col col-form" >
@@ -12,7 +15,7 @@
               matInput
               id="title"
               name="titleName"
-              placeholder="Ingresa título..."
+              placeholder="Ingrese título..."
               [(ngModel)]="taskobj.title"
             />
           </mat-form-field>

@@ -1,33 +1,39 @@
-.field{
-    width: 100%;
-    margin: 0 1%;
+.field {
+  width: 100%;
+  margin: 0 1%;
 }
-.d-flex{
-    width: 100%;
-    display: flex;   
+.d-flex {
+  width: 100%;
+  display: flex;
 }
-.addImg{
-    padding: 20px;
+.addImg {
+  padding: 20px;
 }
 
-.btn-guardar{
-    border-radius: 24px;
+.btn-guardar {
+  border-radius: 24px;
+  text-align: left;
+  font: normal normal medium 14px/16px Roboto;
+  letter-spacing: 1.25px;
+  color: #000000de;
+  text-transform: uppercase;
+  opacity: 1;
 }
-.ml-1{
-    margin-left: 2%;
+.ml-1 {
+  margin-left: 2%;
 }
-.checkboxTask{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
+.checkboxTask {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
 }
-.mr-new{
-    margin: 20px 37px;
-    padding: 0 4%;
+.mr-new {
+  margin: 20px 37px;
+  padding: 0 4%;
 }
 
 .example-full-width {
-    width: 100%;
-    color: white;
-  }
+  width: 100%;
+  color: white;
+}

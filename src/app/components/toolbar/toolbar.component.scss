@@ -1,20 +1,35 @@
-@import '../../app.component.scss'; 
+@import "../../app.component.scss";
 
-.checkComplete{
-    position: relative; 
-    bottom:2%;
+.checkComplete {
+  position: relative;
+  bottom: 2%;
 }
 
-.mat-icon{
-    position: relative; 
-    top:6px;
+.mat-icon {
+  position: relative;
+  top: 6px;
 }
 
-.colorwhite{
-    color: white;
+.colorwhite {
+  color: white;
 }
 
-.col-form{
-    display: flex; 
-    margin: 0 6%
+.col-form {
+  display: flex;
+  margin: 0 6%;
+}
+
+.title {
+  text-align: left;
+  font: normal normal bold 20px/24px Roboto;
+  letter-spacing: 0.62px;
+  color: #ffffffde;
+  opacity: 1;
+}
+.form-check-label {
+  text-align: left;
+  font: normal normal normal 16px/24px Roboto;
+  letter-spacing: 0.5px;
+  color: #ffffffde;
+  opacity: 1;
 }

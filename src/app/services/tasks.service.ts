@@ -24,7 +24,6 @@ export class TasksService {
 
 
   createTask(task:any) {
-    console.log(task);
     const url = `${this.urlBase}`;
     return this.http.post(url, task, { headers: this.httpOptions }).pipe(map(res => res
     ));
