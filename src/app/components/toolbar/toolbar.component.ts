@@ -11,19 +11,24 @@ export class ToolbarComponent implements OnInit, OnChanges {
   @Output() newItemEvent = new EventEmitter<Task>();
   taskobj = new Task();
   @Input() taskSelected = new Task();
+  isSave = false;
   constructor(public taskService: TasksService,
    ) { }
   
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.taskSelected.currentValue.title !== '') {
-      this.taskobj = this.taskSelected;
+    this.setTask(changes.taskSelected.currentValue);
+  }
+  setTask(task: any){
+    if (task.title !== '') {
+      this.taskobj = task;
     }
   }
   createTask(){
+    this.isSave = true;
     this.taskService.createTask(this.taskobj).subscribe((res: any) => {
       if(res){
+        this.setTimeSave();
         this.newItemEvent.emit(this.taskobj);
         this.taskobj = new Task();
       }
@@ -31,11 +36,19 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   updateTask(){
+    this.isSave = true;
     this.taskService.updateTask(this.taskobj.id).subscribe(res => {
       if(res){
+        this.setTimeSave();
         this.taskobj = new Task();
       }
     });
+  }
+
+  setTimeSave(){
+    setTimeout(() => {
+      this.isSave = false;
+    }, 1000);
   }
 
   verifyProcess(){

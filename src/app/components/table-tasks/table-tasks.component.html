@@ -11,10 +11,15 @@
       placeholder="Buscar..."
       class="form-control border"
       id=""
+      maxlength="20"
       (keyup)="applyFilter($event)" #input
     />
   </div>
   <br />
+  <br>
+  <div class="alert alert-danger" role="alert" *ngIf="isDelete" >
+    Se elimino la tarea.
+  </div>
   <div class="mat-elevation-z8">
       
         <table class="tabla" mat-table [dataSource]="taskArray" matSortDirection="desc" matSort (matSortChange)="sortData($event)">

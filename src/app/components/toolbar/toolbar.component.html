@@ -17,6 +17,7 @@
               name="titleName"
               placeholder="Ingrese título..."
               [(ngModel)]="taskobj.title"
+              maxlength="20"
             />
           </mat-form-field>
         </div>
@@ -34,6 +35,7 @@
         <div class="field">
           <button
             type="button"
+            [disabled]="taskobj.title === ''"
             class="btn btn-light btn-guardar"
             (click)="verifyProcess()"
           >
@@ -41,6 +43,9 @@
             Guardar tarea
           </button>
         </div>
+      </div>
+      <div class="alert alert-success" role="alert" *ngIf="isSave">
+        Se guardo la tarea {{taskobj.title}}
       </div>
   </div>
 </div>

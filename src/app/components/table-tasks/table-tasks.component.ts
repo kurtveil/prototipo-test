@@ -30,7 +30,7 @@ export class TableTasksComponent implements OnInit, OnChanges {
   isRateLimitReached = false;
 
   taskArray = new MatTableDataSource<Task>(ELEMENTS);
-
+  isDelete = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() item = new Task();
@@ -68,12 +68,19 @@ export class TableTasksComponent implements OnInit, OnChanges {
   }
 
   deleteTask(id: any) {
+    this.isDelete = true;
     this.tasksServices.deleteTask(id).subscribe((res: any) => {
       if (res) {
-        console.log('Se elimino correctamente');
+        this.setTimeDelete();
         this.getTasksArray();
       }
     });
+  }
+
+  setTimeDelete(){
+    setTimeout(() => {
+      this.isDelete = false;
+    }, 1000);
   }
 
   applyFilter(event: Event) {
