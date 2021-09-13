@@ -15,31 +15,26 @@ export class TasksService {
     this.urlBase = environment.url_tasks;
    }
 
-
   getTasks() {
     const url = `${this.urlBase}`;
-    return this.http.get(url).pipe(map(res => res
-    ));
+    return this.http.get(url).pipe(map(res => res));
   }
 
 
   createTask(task:any) {
     const url = `${this.urlBase}`;
-    return this.http.post(url, task, { headers: this.httpOptions }).pipe(map(res => res
-    ));
+    return this.http.post(url, task, { headers: this.httpOptions }).pipe(map(res => res));
   }
 
   updateTask(id: any) {
-    const url = `${this.urlBase}/?id=${id}`;
-    return this.http.put(url, { headers: this.httpOptions }).pipe(map(res => res
-    ));
+    const url = `${this.urlBase}/${id}`;
+    return this.http.put(url, { headers: this.httpOptions }).pipe(map(res => res));
   }
 
   deleteTask(id: any) {
     const url = `${this.urlBase}/${id}`;
-    return this.http.delete(url, { headers: this.httpOptions }).pipe(map(res => res
-      ));
-    ;
+    return this.http.delete(url, { headers: this.httpOptions }).pipe(map(res => res));
+    
   }
 
 }

@@ -1,4 +1,13 @@
-import { Component, ViewChild, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Task } from 'src/app/models/tasks-model';
 import { HttpClient } from '@angular/common/http';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -13,12 +22,8 @@ const ELEMENTS: Task[] = [];
   styleUrls: ['./table-tasks.component.scss'],
 })
 export class TableTasksComponent implements OnInit, OnChanges {
-  displayedColumns: string[] = [
-    'index',
-    'title',
-    'complete',
-    'delete'
-  ];
+  displayedColumns: string[] = ['index', 'title', 'complete', 'delete'];
+  selectedRowIndex = -1;
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -26,47 +31,45 @@ export class TableTasksComponent implements OnInit, OnChanges {
 
   taskArray = new MatTableDataSource<Task>(ELEMENTS);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() item = new Task();
-
-  constructor(public tasksServices: TasksService,
-              private _httpClient: HttpClient) {}
+  @Output() taskSelected = new EventEmitter<Task>();
+  constructor(
+    public tasksServices: TasksService,
+    private _httpClient: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.getTasksArray();
-     }
-     ngOnChanges(changes: SimpleChanges){
-        if(changes.item.currentValue.title !== ''){
-          this.item = changes.item.currentValue;
-          this.taskArray.data.push(this.item);
-        }
-     }
-
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.item.currentValue.title !== '') {
+      this.item = changes.item.currentValue;
+      this.taskArray.data.push(this.item);
+    }
+  }
 
   getTasksArray() {
     this.tasksServices.getTasks().subscribe((tasks: any) => {
-      this.taskArray.data = tasks
-        this.taskArray.data.sort(function (a , b){
-          if (a.id > b.id) {
-            return 1;
-          }  
-          if (a.id < b.id) {
-            return -1;
-          }
-          return 0;
-        })
-        this.taskArray.sort = this.sort; 
+      this.taskArray.data = tasks;
+      this.taskArray.data.sort(function (a, b) {
+        if (a.id > b.id) {
+          return 1;
+        }
+        if (a.id < b.id) {
+          return -1;
+        }
+        return 0;
+      });
+      this.taskArray.sort = this.sort;
       this.taskArray.paginator = this.paginator;
     });
   }
-  completeTask(element: any){
 
-  }
-
-  deleteTask(id: any){
+  deleteTask(id: any) {
     this.tasksServices.deleteTask(id).subscribe((res: any) => {
-      if(res){
+      if (res) {
         console.log('Se elimino correctamente');
         this.getTasksArray();
       }
@@ -88,14 +91,21 @@ export class TableTasksComponent implements OnInit, OnChanges {
     this.taskArray.data = data.sort((a, b) => {
       let isAsc = sort.direction == 'asc';
       switch (sort.active) {
-        case 'id': return compare(a.id, b.id, isAsc);
-        case 'title': return compare(a.title, b.title, isAsc);
-      
-        default: return 0;
+        case 'id':
+          return compare(a.id, b.id, isAsc);
+        case 'title':
+          return compare(a.title, b.title, isAsc);
+
+        default:
+          return 0;
       }
     });
   }
 
+  highlight(row: any) {
+    this.taskSelected.emit(row);
+    this.selectedRowIndex = row.id;
+  }
 }
 
 function compare(a: any, b: any, isAsc: any) {

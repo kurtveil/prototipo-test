@@ -15,8 +15,7 @@
     />
   </div>
   <br />
-  <div class="example-container mat-elevation-z8">
-    <div class="example-table-container">
+  <div class="mat-elevation-z8">
       
         <table class="tabla" mat-table [dataSource]="taskArray" matSortDirection="desc" matSort (matSortChange)="sortData($event)">
 
@@ -61,7 +60,9 @@
           </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr  mat-row *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{'highlight': selectedRowIndex == row.id}"
+         (click)="highlight(row)"></tr>
 
             <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" colspan="4">
@@ -71,7 +72,6 @@
         </table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
       
     </div>
 

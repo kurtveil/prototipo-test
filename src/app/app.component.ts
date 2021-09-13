@@ -9,9 +9,12 @@ import { Task } from './models/tasks-model';
 export class AppComponent {
   title = 'prototype-test';
   taskShared = new Task();
-
+  taskUpdate = new Task();
   addItem(newItem: Task) {
     this.taskShared = newItem;
+  }
+  getTask(newItem: Task) {
+    this.taskUpdate = newItem;
   }
 
 }
