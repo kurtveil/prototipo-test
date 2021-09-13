@@ -1,18 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 @Injectable({
   providedIn: 'root',
 })
 export class TasksService {
-  public urlBase = environment.urlTasks;
+  public urlBase = '';
   public httpOptions = new HttpHeaders().append(
     'Content-Type',
     'application/json; charset=UTF-8'
   );
   constructor(public http: HttpClient) {
-    // this.urlBase = ;
+    this.urlBase = environment.urlTasks;
   }
 
   getTasks() {
